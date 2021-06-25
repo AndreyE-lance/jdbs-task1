@@ -11,29 +11,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
 public class ProductRepository {
     private final JdbcTemplate jdbcTemplate;
     private static final String SCRIPT_PATH = "getProductNames.sql";
+    private static String script = read(SCRIPT_PATH);
 
     public ProductRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public String getProductName(String name) {
-        var script = read(SCRIPT_PATH);
-        var resultString = new StringBuffer(" Список товаров, заказаных пользователем ")
-                .append(name)
-                .append(": ");
-
-        SqlRowSet resultSet = jdbcTemplate.queryForRowSet(script, name);
-        while (resultSet.next()) {
-            resultString.append(resultSet.getString("product_name"))
-                    .append(" ");
-        }
-        return resultString.toString().trim();
+    public List<Map<String, Object>> getProductName(String name) {
+        List<Map<String, Object>> resultSet = jdbcTemplate.queryForList(script, name);
+        return resultSet;
     }
 
     private static String read(String scriptFileName) {
