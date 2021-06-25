@@ -1,6 +1,4 @@
-CREATE  SCHEMA IF NOT EXISTS netology;
-
-CREATE TABLE IF NOT EXISTS netology.CUSTOMERS
+CREATE TABLE netology.CUSTOMERS
 (
     id           serial      NOT NULL,
     name         VARCHAR(50) NOT NULL,
@@ -11,7 +9,7 @@ CREATE TABLE IF NOT EXISTS netology.CUSTOMERS
 );
 
 
-CREATE TABLE IF NOT EXISTS netology.ORDERS
+CREATE TABLE netology.ORDERS
 (
     id          serial      NOT NULL,
     date         timestamp   NOT NULL DEFAULT current_timestamp,
@@ -21,4 +19,3 @@ CREATE TABLE IF NOT EXISTS netology.ORDERS
     PRIMARY KEY (id),
     FOREIGN KEY (customer_id) REFERENCES netology.CUSTOMERS (id)
 );
-
