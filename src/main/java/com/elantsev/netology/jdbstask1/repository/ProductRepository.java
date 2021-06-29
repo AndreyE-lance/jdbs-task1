@@ -25,8 +25,8 @@ public class ProductRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Map<String, Object>> getProductName(String name) {
-        List<Map<String, Object>> resultSet = jdbcTemplate.queryForList(script, name);
+    public List<String> getProductName(String name) {
+        List<String> resultSet = jdbcTemplate.queryForList(script, new Object[]{name}, String.class);
         return resultSet;
     }
 

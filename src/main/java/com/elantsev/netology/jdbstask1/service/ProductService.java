@@ -16,12 +16,12 @@ public class ProductService {
     }
 
     public String getProductName(String name){
-        List<Map<String, Object>> list = productRepository.getProductName(name);
+        List<String> list = productRepository.getProductName(name);
         StringBuilder sBuilder = new StringBuilder(" Список товаров, заказаных пользователем ")
                 .append(name)
                 .append(": ");
-        for (Map<String, Object> map: list) {
-            sBuilder.append(map.get("product_name"))
+        for (String map: list) {
+            sBuilder.append(map)
                     .append(" ");
         }
         return sBuilder.toString().trim();
